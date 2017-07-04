@@ -1,0 +1,22 @@
+<form [ngFormModel]="form" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+        <label for="username">User Name</label>
+        <input id="username"  class="form-control" type="text" ngControl="username" #username="ngForm" minlength="3">
+         <div *ngIf="username.control.pending">checking the username</div>
+        <div class="alert alert-danger" *ngIf="username.touched && username.errors">
+            <div *ngIf="username.errors.invalidlogin">invalid username</div>
+            <div *ngIf="username.errors.required">User Name is required</div>
+            <div *ngIf="username.errors.minlength">minlength is {{username.errors.minlength.requiredLength}}</div>
+            <div *ngIf="username.errors.nospacevalidator">No spaces</div>
+            <div *ngIf="username.errors.shouldbeUnique">Username already taken</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" class="form-control"  #password="ngForm" ngControl="password">
+        <div class="alert alert-danger" *ngIf="password.touched && password.errors">
+            <div *ngIf="password.errors.required">password is required</div>
+        </div>
+    </div>
+    <button class="btn btn-primary" type="submit" [disabled]="!form.valid">Submit</button>
+</form>

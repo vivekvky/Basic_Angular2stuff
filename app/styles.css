@@ -1,0 +1,7 @@
+.ng-touched.ng-invalid{
+    border: 1px solid #a94442;
+}
+
+body{
+    margin: 100px
+}

@@ -1,0 +1,27 @@
+<form #f="ngForm" (ngSubmit)="onSubmit(f.form)">
+    <div class="form-group">
+        <label for="firstName">First Name</label>
+        <input minlength="3" ngControl="firstName" #firstName="ngForm" type="text" class="form-control" id="firstName" required>
+        <div *ngIf="firstName.touched && firstName.errors">
+            <div class="alert alert-danger" *ngIf="!firstName.valid && firstName.errors.required">firstName is required</div>
+            <div class="alert alert-danger" *ngIf="!firstName.valid && firstName.errors.minlength">firstName minlength is {{firstName.errors.minlength.requiredLength}}</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="comment">Comment</label>
+        <textarea id="comment" cols="30" rows="10" class="form-control" ngControl="comment" required #comment="ngForm"></textarea>
+        <div class="alert alert-danger" *ngIf="!comment.valid && comment.touched">
+            comment is required
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="emails">Emails</label>
+        <select class="form-control" ngControl="emails" id="emails" #emails="ngForm" required>
+        <option *ngFor="#frequency of frequencies">{{frequency}}</option>
+    </select>
+        <div class="alert alert-danger" *ngIf="emails.touched && emails.errors">
+            <div *ngIf="!emails.valid && emails.errors.required">select any one</div>
+        </div>
+    </div>
+    <button class="btn btn-primary" type="submit" [disabled]="!f.valid">Submit</button>
+</form>
